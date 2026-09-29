@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Name — Digital Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #101010;
+    --surface: #171717;
+    --surface-2: #1d1d1d;
+    --text: #f4f1e9;
+    --muted: #aaa69d;
+    --line: #30302e;
+    --blue: #4c83ff;
+    --blue-light: #7da4ff;
+    --max: 1240px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.container {
+    width: min(var(--max), calc(100% - 80px));
+    margin: auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    height: 90px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(16,16,16,.94);
+    backdrop-filter: blur(14px);
+}
+
+.nav {
+    width: min(var(--max), calc(100% - 80px));
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+nav {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+}
+
+nav a {
+    font-size: 13px;
+    color: #d4d1ca;
+    transition: .25s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.nav-button {
+    border: 1px solid #555;
+    padding: 11px 18px;
+    transition: .25s;
+}
+
+.nav-button:hover {
+    border-color: var(--blue);
+    color: var(--blue-light);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 760px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-inner {
+    width: min(var(--max), calc(100% - 80px));
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.eyebrow {
+    color: var(--blue-light);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(58px, 7vw, 104px);
+    line-height: .94;
+    letter-spacing: -.055em;
+    font-weight: 600;
+    max-width: 850px;
+}
+
+.hero h1 em {
+    color: var(--blue-light);
+    font-style: normal;
+}
+
+.hero-description {
+    max-width: 560px;
+    color: var(--muted);
+    margin-top: 34px;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-actions {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 22px;
+    border: 1px solid var(--blue);
+    background: var(--blue);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.button:hover {
+    background: transparent;
+    color: var(--blue-light);
+}
+
+.button-outline {
+    background: transparent;
+    border-color: #555;
+}
+
+.button-outline:hover {
+    border-color: var(--blue);
+    background: transparent;
+}
+
+.hero-note {
+    margin-top: 28px;
+    color: #77746e;
+    font-size: 12px;
+}
+
+/* Hero visual */
+
+.hero-visual {
+    position: relative;
+}
+
+.hero-frame {
+    border: 1px solid var(--line);
+    padding: 12px;
+    background: var(--surface);
+    transform: rotate(2deg);
+}
+
+.hero-frame img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.hero-label {
+    position: absolute;
+    bottom: -20px;
+    left: -30px;
+    background: var(--blue);
+    color: white;
+    padding: 12px 18px;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+/* =========================
+   INTRO STRIP
+========================= */
+
+.intro-strip {
+    border-bottom: 1px solid var(--line);
+    padding: 25px 0;
+}
+
+.intro-strip-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.intro-strip span {
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section {
+    padding: 140px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.section-heading {
+    display: grid;
+    grid-template-columns: .7fr 1.3fr;
+    gap: 60px;
+    margin-bottom: 70px;
+}
+
+.section-number {
+    color: var(--blue-light);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(44px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -.04em;
+}
+
+.section-heading p {
+    color: var(--muted);
+    max-width: 650px;
+    margin-top: 25px;
+    font-size: 16px;
+}
+
+/* =========================
+   FEATURED PROJECT
+========================= */
+
+.project-feature {
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.project-image {
+    overflow: hidden;
+}
+
+.project-image img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform .6s ease;
+}
+
+.project-feature:hover .project-image img {
+    transform: scale(1.025);
+}
+
+.project-info {
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+}
+
+.project-category {
+    color: var(--blue-light);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: .14em;
+    margin-bottom: 12px;
+}
+
+.project-info h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.project-info p {
+    color: var(--muted);
+    max-width: 650px;
+}
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.project-card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    transition: transform .3s, border-color .3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.project-card-image {
+    overflow: hidden;
+}
+
+.project-card-image img {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.project-card-info {
+    padding: 26px;
+}
+
+.project-card-info h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.project-card-info p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+}
+
+.service {
+    min-height: 260px;
+    padding: 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.service-number {
+    color: var(--blue-light);
+    font-size: 12px;
+}
+
+.service h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    margin: 60px 0 12px;
+}
+
+.service p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+}
+
+.about-image {
+    border: 1px solid var(--line);
+    padding: 12px;
+    background: var(--surface);
+}
+
+.about-image img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.about h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(44px, 5vw, 70px);
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.about p {
+    color: var(--muted);
+    margin-bottom: 20px;
+    max-width: 540px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+    text-align: center;
+    padding: 180px 0;
+}
+
+.contact .eyebrow {
+    margin-bottom: 25px;
+}
+
+.contact h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(55px, 8vw, 110px);
+    line-height: .9;
+    letter-spacing: -.05em;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.contact h2 span {
+    color: var(--blue-light);
+}
+
+.contact p {
+    color: var(--muted);
+    max-width: 520px;
+    margin: 30px auto;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 35px 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-inner p {
+    color: #777;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 25px;
+}
+
+.footer-links a {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 850px) {
+
+    .container,
+    .nav,
+    .hero-inner {
+        width: min(100% - 40px, var(--max));
+    }
+
+    header {
+        height: 75px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 100px 0;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .hero h1 {
+        font-size: 58px;
+    }
+
+    .hero-visual {
+        max-width: 500px;
+    }
+
+    section {
+        padding: 90px 0;
+    }
+
+    .section-heading {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .project-info {
+        grid-template-columns: 1fr;
+    }
+
+    .contact {
+        padding: 120px 0;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <div class="nav">
+
+        <a href="#" class="logo">
+            YOUR<span>.</span>NAME
+        </a>
+
+        <nav>
+            <a href="#work">Work</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact" class="nav-button">Let's Talk</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div>
+
+            <div class="eyebrow">
+                Web Designer / Developer
+            </div>
+
+            <h1>
+                Digital work<br>
+                with <em>purpose.</em>
+            </h1>
+
+            <p class="hero-description">
+                I design and build modern websites for businesses
+                that want to look credible, communicate clearly,
+                and turn visitors into customers.
+            </p>
+
+            <div class="hero-actions">
+
+                <a href="#work" class="button">
+                    View My Work →
+                </a>
+
+                <a href="#contact" class="button button-outline">
+                    Start a Project
+                </a>
+
+            </div>
+
+            <p class="hero-note">
+                Based in the Philippines · Working worldwide
+            </p>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="hero-frame">
+
+                <!-- Replace with your own image -->
+                <img
+                    src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1000&q=80"
+                    alt="Design workspace"
+                >
+
+            </div>
+
+            <div class="hero-label">
+                Selected Work / 2026
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STRIP -->
+
+<div class="intro-strip">
+
+    <div class="container intro-strip-inner">
+
+        <span>Web Design</span>
+        <span>Development</span>
+        <span>SEO</span>
+        <span>Brand Experience</span>
+        <span>Digital Strategy</span>
+
+    </div>
+
+</div>
+
+
+<!-- WORK -->
+
+<section id="work">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="section-number">
+                01 / Selected Work
+            </div>
+
+            <div>
+                <h2>
+                    Websites built<br>
+                    to be remembered.
+                </h2>
+
+                <p>
+                    A selection of websites I've designed, developed,
+                    optimized and maintained for real businesses.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- FEATURED -->
+
+        <article class="project-feature">
+
+            <div class="project-image">
+
+                <!-- UNITREADY SCREENSHOT -->
+                <img
+                    src="unitready.jpg"
+                    alt="UnitReady website"
+                >
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+
+                    <div class="project-category">
+                        Website Design · Development · SEO
+                    </div>
+
+                    <h3>UnitReady</h3>
+
+                    <p>
+                        A conversion-focused website for an apartment
+                        turnover and property services company, designed
+                        around clear messaging, service hierarchy and
+                        lead generation.
+                    </p>
+
+                </div>
+
+                <a href="#" class="button">
+                    View Project →
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <br><br>
+
+
+        <!-- OTHER PROJECTS -->
+
+        <div class="project-grid">
+
+            <article class="project-card">
+
+                <div class="project-card-image">
+
+                    <img
+                        src="salon-collective.jpg"
+                        alt="The Salon Collective website"
+                    >
+
+                </div>
+
+                <div class="project-card-info">
+
+                    <div class="project-category">
+                        Web Design · Development
+                    </div>
+
+                    <h3>The Salon Collective</h3>
+
+                    <p>
+                        A refined salon brand experience focused on
+                        photography, typography, locations and
+                        appointment conversion.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <article class="project-card">
+
+                <div class="project-card-image">
+
+                    <img
+                        src="mrg.jpg"
+                        alt="Michigan Rheumatology Group website"
+                    >
+
+                </div>
+
+                <div class="project-card-info">
+
+                    <div class="project-category">
+                        Web Design · Healthcare
+                    </div>
+
+                    <h3>Michigan Rheumatology Group</h3>
+
+                    <p>
+                        A healthcare website designed around trust,
+                        accessibility, provider information and
+                        appointment conversion.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div class="section-number">
+                02 / Services
+            </div>
+
+            <div>
+
+                <h2>
+                    More than<br>
+                    just a website.
+                </h2>
+
+                <p>
+                    I work across design, development and optimization
+                    to make sure a website doesn't just look good —
+                    it works.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="services">
+
+            <div class="service">
+
+                <div class="service-number">01</div>
+
+                <h3>Web Design</h3>
+
+                <p>
+                    Modern, responsive interfaces designed around
+                    the brand, audience and goals of the business.
+                </p>
+
+            </div>
+
+
+            <div class="service">
+
+                <div class="service-number">02</div>
+
+                <h3>Development</h3>
+
+                <p>
+                    Clean, responsive implementation across platforms
+                    including Wix, WordPress and Elementor.
+                </p>
+
+            </div>
+
+
+            <div class="service">
+
+                <div class="service-number">03</div>
+
+                <h3>SEO</h3>
+
+                <p>
+                    Technical and on-page optimization designed to
+                    improve visibility and search performance.
+                </p>
+
+            </div>
+
+
+            <div class="service">
+
+                <div class="service-number">04</div>
+
+                <h3>Branding</h3>
+
+                <p>
+                    Visual systems that create consistency across
+                    websites, marketing materials and digital channels.
+                </p>
+
+            </div>
+
+
+            <div class="service">
+
+                <div class="service-number">05</div>
+
+                <h3>Maintenance</h3>
+
+                <p>
+                    Ongoing updates, fixes and improvements that
+                    keep business websites reliable.
+                </p>
+
+            </div>
+
+
+            <div class="service">
+
+                <div class="service-number">06</div>
+
+                <h3>Strategy</h3>
+
+                <p>
+                    Helping businesses determine what their website
+                    needs to communicate and accomplish.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="container about">
+
+        <div class="about-image">
+
+            <!-- Replace with your photo -->
+            <img
+                src="your-photo.jpg"
+                alt="Your Name"
+            >
+
+        </div>
+
+
+        <div>
+
+            <div class="eyebrow">
+                03 / About
+            </div>
+
+            <h2>
+                I make the web<br>
+                work harder.
+            </h2>
+
+            <p>
+                I'm a web designer and developer focused on creating
+                websites that combine strong visual design with
+                practical business results.
+            </p>
+
+            <p>
+                From the first layout to the final SEO adjustment,
+                I care about the details that make a website feel
+                professional, trustworthy and easy to use.
+            </p>
+
+            <a href="#contact" class="button">
+                Work With Me →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact">
+
+    <div class="container">
+
+        <div class="eyebrow">
+            04 / Start a Project
+        </div>
+
+        <h2>
+            Have something<br>
+            <span>worth building?</span>
+        </h2>
+
+        <p>
+            Tell me what you're working on, what you need,
+            and where you want to take it.
+        </p>
+
+        <a href="mailto:hello@example.com" class="button">
+            Let's Talk →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <p>
+            © 2026 Your Name. All rights reserved.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
