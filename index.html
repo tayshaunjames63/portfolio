@@ -133,6 +133,32 @@ nav a:hover {
     border-bottom: 1px solid var(--line);
 }
 
+/* Animated current behind the opening hero */
+.hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -12%;
+    right: -12%;
+    bottom: -95px;
+    height: 280px;
+    pointer-events: none;
+    opacity: .28;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='0 0 1200 300'%3E%3Cg fill='none' stroke='%234c83ff' stroke-width='2' opacity='.8'%3E%3Cpath d='M-50 150 C150 20 250 280 450 150 S750 20 950 150 S1150 280 1350 150'/%3E%3Cpath d='M-50 185 C150 55 250 315 450 185 S750 55 950 185 S1150 315 1350 185' opacity='.55'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 1200px 300px;
+    animation: hero-wave-flow 13s linear infinite;
+    mix-blend-mode: screen;
+}
+@keyframes hero-wave-flow {
+    from { background-position: 0 0; transform: translateY(0); }
+    to { background-position: -1200px 0; transform: translateY(-16px); }
+}
+
 .hero-inner {
     width: min(var(--max), calc(100% - 80px));
     margin: auto;
@@ -360,22 +386,28 @@ nav a:hover {
     color: white;
 }
 
-/* Moving capability ticker */
+/* Seamless capability ticker */
 .intro-strip {
     overflow: hidden;
+    position: relative;
+    isolation: isolate;
 }
 
 .intro-strip-inner {
+    display: flex;
     width: max-content;
-    min-width: 100%;
+    min-width: 0;
     flex-wrap: nowrap;
     justify-content: flex-start;
     gap: 0;
-    animation: ticker-scroll 28s linear infinite;
+    animation: ticker-scroll 32s linear infinite;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .intro-strip-inner span {
     display: inline-flex;
+    flex: 0 0 auto;
     align-items: center;
     gap: 28px;
     padding: 0 28px;
@@ -393,8 +425,8 @@ nav a:hover {
 }
 
 @keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* Subtle entrance as sections enter the viewport */
@@ -419,7 +451,6 @@ nav a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .intro-strip-inner,
     .hero-label {
         animation: none !important;
     }
@@ -431,6 +462,159 @@ nav a:hover {
     *, *::before, *::after {
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+    }
+    .intro-strip-inner {
+        animation: ticker-scroll 32s linear infinite !important;
+    }
+}
+
+
+/* =========================
+   ATMOSPHERIC BACKGROUND
+========================= */
+body {
+    position: relative;
+    isolation: isolate;
+    background:
+        radial-gradient(ellipse at 12% 18%, rgba(40, 91, 180, .13), transparent 34%),
+        radial-gradient(ellipse at 88% 58%, rgba(33, 76, 150, .10), transparent 32%),
+        var(--bg);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -18%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .48;
+    background:
+        radial-gradient(ellipse at 22% 38%, rgba(55, 115, 220, .13), transparent 28%),
+        radial-gradient(ellipse at 78% 62%, rgba(49, 91, 177, .11), transparent 30%);
+    filter: blur(42px);
+    animation: ambient-drift 24s ease-in-out infinite alternate;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .13;
+    background-image:
+        linear-gradient(rgba(125,164,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125,164,255,.08) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+@keyframes ambient-drift {
+    0% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+    100% { transform: translate3d(1.5%, 1%, 0) scale(1.08); }
+}
+
+/* Flowing wave backgrounds */
+#work, #services, #about {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+}
+
+#work::before,
+#services::before,
+#about::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    opacity: .52;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1100' height='420' viewBox='0 0 1100 420'%3E%3Cg fill='none' stroke='%237da4ff' stroke-width='1.5' opacity='.6'%3E%3Cpath d='M-80 115 C90 15 180 215 350 115 S610 15 780 115 S1040 215 1210 115'/%3E%3Cpath d='M-80 145 C90 45 180 245 350 145 S610 45 780 145 S1040 245 1210 145' opacity='.65'/%3E%3Cpath d='M-80 175 C90 75 180 275 350 175 S610 75 780 175 S1040 275 1210 175' opacity='.4'/%3E%3Cpath d='M-80 275 C90 175 180 375 350 275 S610 175 780 275 S1040 375 1210 275' opacity='.35'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 1100px 420px;
+    background-position: 0 40%;
+    animation: ocean-flow 16s linear infinite;
+    mix-blend-mode: screen;
+}
+
+#services::before {
+    opacity: .38;
+    animation-duration: 21s;
+    animation-direction: reverse;
+    background-position: 0 60%;
+}
+
+#about::before {
+    opacity: .42;
+    animation-duration: 18s;
+    background-position: 0 48%;
+}
+
+#work::after,
+#services::after,
+#about::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    opacity: .24;
+    background:
+        radial-gradient(ellipse at 22% 45%, rgba(55,115,220,.30), transparent 36%),
+        radial-gradient(ellipse at 78% 68%, rgba(76,131,255,.22), transparent 34%);
+    background-size: 150% 150%;
+    animation: blue-current 12s ease-in-out infinite alternate;
+}
+
+#work > .container,
+#services > .container,
+#about > .container {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes ocean-flow {
+    from { background-position: 0 40%; transform: translate3d(0, 0, 0) scale(1.02); }
+    to { background-position: -1100px 52%; transform: translate3d(0, 12px, 0) scale(1.06); }
+}
+
+@keyframes blue-current {
+    from { background-position: 0% 30%; opacity: .14; }
+    to { background-position: 100% 70%; opacity: .34; }
+}
+
+/* A soft animated sheen for the main featured project */
+.project-feature {
+    background:
+        linear-gradient(115deg, rgba(76,131,255,.045), transparent 38%),
+        var(--surface);
+}
+
+.project-feature .project-info {
+    position: relative;
+}
+
+.project-feature .project-info::after {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    right: 7%;
+    bottom: -125px;
+    border-radius: 50%;
+    background: rgba(76,131,255,.09);
+    filter: blur(42px);
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation-duration: 60s !important;
+    }
+    #work::before, #services::before, #about::before, .hero::before,
+    #work::after, #services::after, #about::after {
+        animation-duration: 45s !important;
     }
 }
 
@@ -802,6 +986,18 @@ footer {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
+    }
+}
+
+/* Keep the wave layers visible behind, never over, the content */
+#work > .container, #services > .container, #about > .container {
+    position: relative;
+    z-index: 2;
+}
+@media (max-width: 850px) {
+    #work::before, #services::before, #about::before {
+        background-size: 820px 360px;
+        opacity: .38;
     }
 }
 </style>
