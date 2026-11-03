@@ -220,6 +220,19 @@ nav a:hover {
     position: relative;
 }
 
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    width: 72%;
+    aspect-ratio: 1;
+    right: -8%;
+    top: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,131,255,.18), transparent 68%);
+    filter: blur(8px);
+    pointer-events: none;
+}
+
 .hero-frame {
     border: 1px solid var(--line);
     padding: 12px;
@@ -265,6 +278,160 @@ nav a:hover {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: .1em;
+}
+
+/* =========================
+   MOTION & INTERACTION
+========================= */
+
+.project-info .button {
+    margin-top: 18px;
+    white-space: nowrap;
+}
+
+.project-card-info .project-link {
+    display: inline-flex;
+    margin-top: 18px;
+    padding-top: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--blue-light);
+    transition: color .25s, transform .25s;
+}
+
+.project-card-info .project-link:hover {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.project-card-image img,
+.project-image img {
+    transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+
+.project-card:hover .project-card-image img,
+.project-feature:hover .project-image img {
+    transform: scale(1.035);
+    filter: saturate(1.08);
+}
+
+.project-feature,
+.project-card,
+.service {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before,
+.project-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .55s ease;
+    z-index: 2;
+}
+
+.project-card:hover::before,
+.project-feature:hover::before {
+    transform: scaleX(1);
+}
+
+.service {
+    transition: background .3s ease, transform .3s ease;
+}
+
+.service:hover {
+    background: #1b1d22;
+}
+
+.service-number {
+    display: inline-block;
+    transition: transform .3s ease, color .3s ease;
+}
+
+.service:hover .service-number {
+    transform: translateY(-4px);
+    color: white;
+}
+
+/* Moving capability ticker */
+.intro-strip {
+    overflow: hidden;
+}
+
+.intro-strip-inner {
+    width: max-content;
+    min-width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    animation: ticker-scroll 28s linear infinite;
+}
+
+.intro-strip-inner span {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 28px;
+    white-space: nowrap;
+}
+
+.intro-strip-inner span::after {
+    content: "✳";
+    color: var(--blue-light);
+    font-size: 13px;
+}
+
+.intro-strip:hover .intro-strip-inner {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Subtle entrance as sections enter the viewport */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-label {
+    animation: label-float 4.5s ease-in-out infinite;
+}
+
+@keyframes label-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intro-strip-inner,
+    .hero-label {
+        animation: none !important;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
 }
 
 /* =========================
@@ -681,9 +848,9 @@ footer {
             </h1>
 
             <p class="hero-description">
-                I design and build modern websites for businesses
-                that want to look credible, communicate clearly,
-                and turn visitors into customers.
+                I like getting into the details of a website — shaping the
+                design, building the pages, sorting out the technical side,
+                and making sure everything works as it should.
             </p>
 
             <div class="hero-actions">
@@ -696,7 +863,7 @@ footer {
                     Start a Project
                 </a>
                 <a href="resume.pdf" class="button button-outline" download>
-                    Download Resume ↓
+                    Download Resume (PDF) ↓
                 </a>
 
             </div>
@@ -737,11 +904,16 @@ footer {
 
     <div class="container intro-strip-inner">
 
-        <span>Web Design</span>
-        <span>Development</span>
-        <span>SEO</span>
-        <span>Brand Experience</span>
-        <span>Digital Strategy</span>
+        <span>Web Development</span>
+        <span>Website Management</span>
+        <span>SEO & Indexing</span>
+        <span>Responsive Design</span>
+        <span>Technical Support</span>
+        <span aria-hidden="true">Web Development</span>
+        <span aria-hidden="true">Website Management</span>
+        <span aria-hidden="true">SEO & Indexing</span>
+        <span aria-hidden="true">Responsive Design</span>
+        <span aria-hidden="true">Technical Support</span>
 
     </div>
 
@@ -754,7 +926,7 @@ footer {
 
     <div class="container">
 
-        <div class="section-heading">
+        <div class="section-heading reveal">
 
             <div class="section-number">
                 01 / Selected Work
@@ -777,19 +949,20 @@ footer {
 
         <!-- FEATURED PROJECT -->
 
-        <article class="project-feature">
+        <article class="project-feature reveal">
             <div class="project-image">
                 <img src="images/mufflerman.jpg"
                      alt="Mufflerman of Brighton website preview" loading="lazy">
             </div>
             <div class="project-info">
                 <div>
-                    <div class="project-category">Website Design · Development · SEO</div>
+                    <div class="project-category">End-to-End Website Management · Wix · SEO</div>
                     <h3>Mufflerman of Brighton</h3>
                     <p>
-                        A website for an automotive exhaust and repair business,
-                        presenting its services and helping visitors find the
-                        information they need.
+                        I took care of the website from the front end to the
+                        behind-the-scenes setup: page content, layout, mobile
+                        adjustments, SEO metadata, Google indexing, troubleshooting,
+                        and hosting and domain management.
                     </p>
                 </div>
                 <a href="https://www.mufflermanbrighton.com/" class="button"
@@ -806,50 +979,50 @@ footer {
         <!-- OTHER PROJECTS -->
 
         <div class="project-grid">
-            <article class="project-card">
+            <article class="project-card reveal">
                 <div class="project-card-image">
                     <img src="images/salon-collective.jpg" alt="The Salon Collective website preview" loading="lazy">
                 </div>
                 <div class="project-card-info">
-                    <div class="project-category">Web Design · Development</div>
+                    <div class="project-category">Website Development · Management · SEO</div>
                     <h3>The Salon Collective</h3>
-                    <p>A salon website presenting the brand, services, and location information in a clear, polished format.</p>
+                    <p>I handled the website across design, page building, content, responsive adjustments, SEO, technical fixes, and ongoing management — keeping the experience clear and consistent.</p>
                     <a class="project-link" href="https://thesalon-collective.com/" target="_blank" rel="noopener noreferrer">View Live Site ↗</a>
                 </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card reveal">
                 <div class="project-card-image">
                     <img src="images/mrg.jpg" alt="Michigan Rheumatology Group website preview" loading="lazy">
                 </div>
                 <div class="project-card-info">
-                    <div class="project-category">Web Design · Healthcare</div>
+                    <div class="project-category">Website Development · Management · SEO</div>
                     <h3>Michigan Rheumatology Group</h3>
-                    <p>A healthcare website organized around practice information, patient resources, and ways to connect with the clinic.</p>
+                    <p>I managed the site's design, page structure, content, responsive behavior, SEO, and technical upkeep, with special care for making practice information easy for visitors to find.</p>
                     <a class="project-link" href="https://www.michiganrheum.com/" target="_blank" rel="noopener noreferrer">View Live Site ↗</a>
                 </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card reveal">
                 <div class="project-card-image">
                     <img src="images/mifuntastic-inflatables.jpg" alt="Mi Funtastic Inflatables website preview" loading="lazy">
                 </div>
                 <div class="project-card-info">
-                    <div class="project-category">Web Design · Website Management</div>
+                    <div class="project-category">Website Development · Management · Optimization</div>
                     <h3>Mi Funtastic Inflatables</h3>
-                    <p>A business website for an inflatable rental company, helping customers explore offerings and get in touch.</p>
+                    <p>I looked after the full website experience — from its layout and service content to mobile usability, SEO, technical maintenance, and the setup that keeps the site running.</p>
                     <a class="project-link" href="https://mifuntasticinflatables.com/" target="_blank" rel="noopener noreferrer">View Live Site ↗</a>
                 </div>
             </article>
 
-            <article class="project-card">
+            <article class="project-card reveal">
                 <div class="project-card-image">
                     <img src="images/green-bean.jpg" alt="The Green Bean website preview" loading="lazy">
                 </div>
                 <div class="project-card-info">
-                    <div class="project-category">Website Management · Optimization</div>
+                    <div class="project-category">Website Development · Management · Optimization</div>
                     <h3>The Green Bean</h3>
-                    <p>A business website project focused on maintaining a clear online presence and a smooth visitor experience.</p>
+                    <p>I handled the site's design and content updates, responsive improvements, SEO-related work, troubleshooting, and day-to-day technical management.</p>
                     <a class="project-link" href="https://thegreenbeanmi.com/" target="_blank" rel="noopener noreferrer">View Live Site ↗</a>
                 </div>
             </article>
@@ -866,7 +1039,7 @@ footer {
 
     <div class="container">
 
-        <div class="section-heading">
+        <div class="section-heading reveal">
 
             <div class="section-number">
                 02 / Services
@@ -892,85 +1065,85 @@ footer {
 
         <div class="services">
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">01</div>
 
                 <h3>Web Design</h3>
 
                 <p>
-                    Modern, responsive interfaces designed around
-                    the brand, audience and goals of the business.
+                    I shape page layouts and visual details around the
+                    business, its audience, and what visitors need to do.
                 </p>
 
             </div>
 
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">02</div>
 
                 <h3>Development</h3>
 
                 <p>
-                    Clean, responsive implementation across platforms
-                    including Wix, WordPress and Elementor.
+                    I build, organize, and improve business websites using
+                    platforms such as Wix, WordPress, Elementor, and Shopify.
                 </p>
 
             </div>
 
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">03</div>
 
                 <h3>SEO</h3>
 
                 <p>
-                    Technical and on-page optimization designed to
-                    improve visibility and search performance.
+                    I handle page titles, meta descriptions, indexing setup,
+                    and practical checks that make pages easier to discover.
                 </p>
 
             </div>
 
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">04</div>
 
                 <h3>Branding</h3>
 
                 <p>
-                    Visual systems that create consistency across
-                    websites, marketing materials and digital channels.
+                    I bring the look and feel of a business together so its
+                    website feels consistent, recognizable, and considered.
                 </p>
 
             </div>
 
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">05</div>
 
                 <h3>Maintenance</h3>
 
                 <p>
-                    Ongoing updates, fixes and improvements that
-                    keep business websites reliable.
+                    I look after the details after launch: updates, fixes,
+                    hosting, domains, and the occasional unexpected issue.
                 </p>
 
             </div>
 
 
-            <div class="service">
+            <div class="service reveal">
 
                 <div class="service-number">06</div>
 
                 <h3>Strategy</h3>
 
                 <p>
-                    Helping businesses determine what their website
-                    needs to communicate and accomplish.
+                    I think through page structure and content so visitors
+                    can find what they need without having to work for it.
                 </p>
 
             </div>
@@ -988,7 +1161,7 @@ footer {
 
     <div class="container about">
 
-        <div class="about-image">
+        <div class="about-image reveal">
 
             <!-- Replace with your photo -->
             <img
@@ -1011,15 +1184,17 @@ footer {
             </h2>
 
             <p>
-                I'm a web designer and developer focused on creating
-                websites that combine strong visual design with
-                practical business results.
+                I'm a hands-on web developer and website manager. I enjoy
+                taking a website from a rough idea or an existing setup and
+                working through the details until it feels clear, useful,
+                and ready for real people.
             </p>
 
             <p>
-                From the first layout to the final SEO adjustment,
-                I care about the details that make a website feel
-                professional, trustworthy and easy to use.
+                I work across design, content, responsive layouts, SEO,
+                hosting, domains, and troubleshooting. I care about the
+                small things people notice — and the technical details
+                they shouldn't have to think about.
             </p>
 
             <a href="#contact" class="button">
@@ -1083,6 +1258,29 @@ footer {
     </div>
 
 </footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+        items.forEach(item => item.classList.add("is-visible"));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    items.forEach(item => observer.observe(item));
+});
+</script>
 
 </body>
 </html>
